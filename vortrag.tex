@@ -27,6 +27,34 @@
 \frame {
 	\frametitle{Einleitung}
 }
+
+\frame {
+	\frametitle{M$^2$etis}
+	\begin{figure}[htbp]
+	\centering
+	\resizebox{\textwidth}{!}{%
+	\includegraphics{grafics/metis_aufbau.pdf}}
+	\caption{Architekturübersicht von M$^2$etis}
+	\label{fig:metis_aufbau}
+	\end{figure}
+}
+
+\frame {
+	\frametitle{M$^2$etis}
+	\begin{figure}[htbp]
+	\resizebox{0.5\textwidth}{!}{%
+	\includegraphics{grafics/metis_aufbau.pdf}}
+	\label{fig:metis_aufbau}
+	\end{figure}
+	\begin{enumerate}
+	\item Semantische Beschreibung der Eventtypen
+	\item Generierung der optimierten Kanäle
+	\item Benutzung des PubSubSytems
+	\end{enumerate}
+}
+
+
+
 \section{Szenario}
 \frame {
 	\frametitle{Szenario}
@@ -46,6 +74,15 @@
 \section{Umsetzung der Dimensionen}
 \frame {
 	\frametitle{Umsetzung der Dimensionen}
+	\begin{description}
+	\item[Verteilung] bestimmt die Verteilungsart der einzelnen Events und den Aufbau des logischen Multicast-Trees, mittels dessen die Nachrichten versandt werden \cite{KostasKatrinis2005}.
+	\item[Filterung] erlaubt es Anmeldungen, Prädikate mitzugeben. Implementierungen dieser Policy müssen sicherstellen, dass diese Prädikate nach oben im Multicast-Tree zusammengeführt und Nachrichten frühzeitig gefiltert werden können. Dies bedeutet, dass Nachrichten jeweils beim Versand durch den logischen Kopf des Multicast-Trees gefiltert werden.
+	\item[Zustellung] bestimmt das Kommunikationsparadigma des Nachrichtenversands und leitet beispielsweise den Versand von Bestätigungen über eingegangene Nachrichten an den sendenden Knoten ein.
+	\item[Reihenfolge] definiert das Synchronisationskonzept eines Kanals.
+	\item[Persistenz] bietet die Möglichkeit der Speicherung eines Events beziehungsweise der daraus erfolgenden Zustandsänderung der virtuellen Welt.
+	\item[Sicherheit] gibt eine Schnittstelle zur Nachrichtenverschlüsselung vor.
+	\item[Validität] prüft die ankommenden Nachrichten auf ihre Validität. Frühzeitig verworfene Nachrichten vermindern das Nachrichtenaufkommen im System stark.
+	\end{description}
 }
 \section{Konzeption des Publish/Subscribe-Systems}
 \frame {
