@@ -1,6 +1,6 @@
-\documentclass{beamer}
-\usepackage[ngerman]{babel}
+\documentclass[professionalfonts]{beamer}
 \usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
 \usepackage{graphicx}
 \usepackage{hyperref}
 %\usepackage[plainpages=false, pdfpagelabels, colorlinks=true, linkcolor=black, menucolor=black, urlcolor=black, citecolor=black, pdftitle={Entwicklung eines Frameworks fuer die Verteilungsoptimierung in Publish/Subscribe Systemen auf Basis eines strukturierten P2P-Overlay Netzwerks}, pdfauthor={Johannes Held}, pdfsubject={Abschlussvortrag}, pdfkeywords={event dissemination, p2p-overlay network, publish/subscribe system, decentralized}]{hyperref}
@@ -26,6 +26,17 @@
 \section{Einleitung}
 \frame {
 	\frametitle{Einleitung}
+	Ich will erzählen warum. Warum p2p, warum verteilt?
+	
+	\begin{block}{Kommunikation via Broadcast}
+		\begin{itemize}
+			\item $n$ Knoten; je 10 Bytes pro Update
+			\item Framerate 30 Hz (30 Updates/s)
+			\item pro Frame 0,3 KB/s an Server
+			\item Server hat 100 Mbit/s (12500 KB/s)
+			\item $\lfloor\sqrt{12500\,KB/s \div 0,3\,KB/s}\rfloor = 204$
+		\end{itemize}
+	 \end{block}
 }
 
 \frame {
@@ -66,6 +77,10 @@
 \section{Strukturierte p2p-Netzwerke}
 \frame {
 	\frametitle{Strukturierte p2p-Netzwerke}
+	\begin{itemize}
+		\item Einarbeiten und Verstehen von CAN, Chord und Pastry
+		\item Suche 
+	\end{itemize}
 }
 \subsection{KBR-API}
 \frame {
@@ -89,6 +104,44 @@
 	\frametitle{Konzeption des Publish/Subscribe-Systems}
 }
 
+\section{Hindernisse bei der Implementierung}
+\frame{
+	\frametitle{Hindernisse bei der Implementierung}
+	\begin{block}{Knotenausfall wird nicht erkannt}
+		\pause
+		\dots obwohl Chimera-Code das Nachrichtensenden prüft
+		\pause
+		\begin{itemize}
+			\item Chimera sendet Nachrichten mit UDP
+			\item $\rightarrow$ Heartbeat-Mechanismus zur Erkennung
+		\end{itemize}
+	\end{block}
+	\pause
+	\begin{block}{Richtige Kommunikation schwer prüfbar}
+		\pause
+		\begin{itemize}
+			\item Zu wenige Knoten $\rightarrow$ Fehlerhafte Einteilung in Routingtabellen
+			\item Zu viele Knoten $\rightarrow$ Debug-Ausgaben nicht mehr erfassbar
+		\end{itemize}		
+	\end{block}
+
+}
+
+
+\section{Offene Punkte}
+\frame{
+	\frametitle{Offene Punkte}
+	\begin{block}{Weiterführende Arbeiten}
+	\begin{itemize}[<+->]
+		\item Kostenmodell \& Semantische Beschreibung \& DSL
+
+		\item Strategies, Strategies, Strategies
+		\item M$^2$etis-Optimierer
+		\item Simulator (bsp. OverSim)
+	\end{itemize}
+	\end{block}
+}
+
 \section{Fragen?}
 \frame{
 	\frametitle{Fragen?}
@@ -96,9 +149,5 @@
 	$\dots$ vielen Dank.
 }
 
-
-%	\begin{block}{O-Ton Linus Torvalds}
-%	DVCS are cool.\\
-%	\end{block}
 
 \end{document}
