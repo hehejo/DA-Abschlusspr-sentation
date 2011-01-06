@@ -69,11 +69,65 @@
 \section{Szenario}
 \frame {
 	\frametitle{Szenario}
+	Beispiel geben -> Eventtypen
 }
 \section{Klassifizierung von Eventtypen}
 \frame {
 	\frametitle{Klassifizierung von Eventtypen}
+	\only<1> {
+		\begin{block}{Dimensionen}
+			\begin{itemize}
+				\item Kontext
+				\item Synchronisation
+				\item Persistenz
+				\item Sicherheit
+				\item Validität
+				\item Zustellung
+			\end{itemize}
+		\end{block}		
+	}
+	\only<2-4> {
+	\begin{columns}
+		\column{.4\textwidth}
+		\begin{block}{Dimensionen}
+		\begin{itemize}
+			\item Kontext
+			\item Synchronisation
+			\item Persistenz
+			\item Sicherheit
+			\item Validität
+			\item Zustellung
+		\end{itemize}
+	\end{block}		
+	\column{.6\textwidth}
+		\only<3>{
+		\begin{block}{Bewegung}
+		\begin{itemize}
+			\item räumlicher Kontext
+			\item keine Synchronisierung
+			\item keine Abspeicherung
+			\item keine Verschlüsselung
+			\item begrenzt zeitlich valide
+			\item ohne Zustellbenachrichtigung
+		\end{itemize}
+		\end{block}}
+	\only<4>{
+		\begin{block}{Gegenstand aufnehmen}
+		\begin{itemize}
+			\item globaler Kontext
+			\item Synchronisierung
+			\item Abspeicherung
+			\item Verschlüsselung
+			\item unbegrenzt zeitlich valide
+			\item garantierte Zustellung
+		\end{itemize}
+		\end{block}}
+	
+	
+	\end{columns} }
+
 }
+
 \section{Strukturierte p2p-Netzwerke}
 \frame {
 	\frametitle{Strukturierte p2p-Netzwerke}
