@@ -1,9 +1,15 @@
+.PHONY: fast full
 
-
-vortrag.pdf: vortrag.tex
-	@make clean
-	pdflatex vortrag.tex && pdflatex vortrag.tex
-
-clean:
-	rm -rf vortrag.log vortrag.aux vortrag.toc vortrag.snm vortrag.nav vortrag.out
-
+fast:
+	pdflatex vortrag
+	
+full:
+	pdflatex vortrag
+	#makeindex -g -l -s index.ist vortrag &
+	bibtex vortrag 
+	pdflatex vortrag
+	bibtex vortrag 
+	pdflatex vortrag
+	
+crop: 
+	cd grafics; ./cropem.rb
