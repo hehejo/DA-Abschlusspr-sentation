@@ -33,11 +33,13 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 \frame{\tableofcontents}
 
 \section{Einleitung}
+\subsection*{Szenario}
 \frame {
 	\frametitle{Szenario}
 	Beispiel geben $\rightarrow$ Eventtypen
 }
 
+\subsection*{Motivation}
 \frame {
 	\frametitle{Motivation I}
 	Ich will erzählen warum. Warum p2p, warum verteilt?
@@ -65,18 +67,18 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	 \end{block}
 	 
 	 \pause
-	 \begin{block}{M$^2$etis}
+	 \begin{block}{M$^2$etis (Massive Multiuser Event InfraStructure)}
 	 	 	\begin{itemize}
 	 	 		\item Semantische Beschreibung der Eventtypen
 	 	 		\begin{itemize}
 	 	 		\item Optimierte Verteilung aller Events
 	 	 		\end{itemize}
-	 	 		\item Kommunikation via P2P
+	 	 		\item Kommunikation via p2p
 	 	 	\end{itemize}
 	 \end{block}
 }
 
-\subsection{Eventtypen und Events}
+\subsection*{Eventtypen und Events}
 \frame{
 	\frametitle{Eventtypen und Events}
 	\begin{columns}
@@ -100,28 +102,29 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 }
 
 \section{M$^2$etis}
+\subsection{Aufbau}
 \frame[plain] {
-	\frametitle{M$^2$etis}
+	\frametitle{M$^2$etis -- Aufbau}
 	
-	\only<1>{
+	%\only<1>{
 	\begin{figure}[H]
 	\centering
 	\resizebox{\textwidth}{!}{%
 	\includegraphics{grafics/metis_aufbau.pdf}}
 	\end{figure}
-	}
-	\only<2>{
-	\begin{figure}[H]
-	\resizebox{0.9\textwidth}{!}{%
-	\includegraphics{grafics/metis_aufbau.pdf}}
-	\end{figure}
+	%}
+	%\only<2>{
+	%\begin{figure}[H]
+	%\resizebox{0.9\textwidth}{!}{%
+	%\includegraphics{grafics/metis_aufbau.pdf}}
+	%\end{figure}
 
-	\begin{enumerate}
-		\item Semantische Beschreibung der Eventtypen
-		\item Generierung der optimierten Kanäle
-		\item Benutzung des PubSubSytems
-	\end{enumerate}
-	}
+	%\begin{enumerate}
+	%	\item Semantische Beschreibung der Eventtypen
+	%	\item Generierung der optimierten Kanäle
+	%	\item Benutzung des PubSubSytems
+	%\end{enumerate}
+	%}
 }
 
 \subsection{Klassifizierung von Eventtypen}
@@ -154,7 +157,7 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	\end{block}		
 	\column{.6\textwidth}
 		\only<2>{
-		\begin{block}{Bewegung}
+		\begin{block}{Position}
 		\begin{itemize}
 			\item räumlicher Kontext
 			\item keine Synchronisierung
@@ -186,13 +189,13 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 		\item Einarbeiten und Verstehen von CAN, Chord und Pastry 
 	\end{itemize}
 }
-\subsection{KBR-API}
+\subsection*{KBR-API}
 \frame {
 	\frametitle{KBR-API}
 	API erklären
 }
 
-\subsection{Multicast-Tree}
+\subsection*{Multicast-Tree}
 \frame{
 	\frametitle{Multicast-Tree (PubSub in verteilten Netzen)}
 	\begin{figure}[H]
@@ -311,7 +314,7 @@ Publish	    & \texttt{deliver} & + & + & + & + & + & + & + \\
 	\end{figure}
 }
 
-\subsection{Hindernisse}
+\subsection*{Hindernisse}
 \frame{
 	\frametitle{Hindernisse bei der Implementierung}
 	\only<1-2> {	
@@ -340,11 +343,11 @@ Publish	    & \texttt{deliver} & + & + & + & + & + & + & + \\
 	\frametitle{Offene Punkte}
 	\begin{block}{Es fehlen noch \dots}
 	\begin{itemize}[<+->]
+		\pause
 		\item Kostenmodell \& Semantische Beschreibung \& DSL
 		\item Strategies, Strategies, Strategies
 		\item M$^2$etis-Optimierer
 		\item Simulator (bsp. OverSim)
-		\pause
 		\item \dots
 	\end{itemize}
 	\end{block}
