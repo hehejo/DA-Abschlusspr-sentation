@@ -10,68 +10,121 @@
 \usepackage{booktabs}
 \usepackage[babel,german=quotes]{csquotes}
 
+\usetheme{Malmoe}
+
 \usecolortheme{crane}
 
-\title{Entwicklung eines Frameworks für die Verteilungsoptimierung in Publish/Subscribe-Systemen auf Basis eines strukturierten P2P-Overlay-Netzwerks}
-\author{Johannes Held\\\url{johannes.held@cs.fau.de}}
+\title[]{Entwicklung eines Frameworks für die Verteilungsoptimierung in Publish/Subscribe-Systemen auf Basis eines strukturierten P2P-Overlay-Netzwerks}
+\author[Johannes Held]{Johannes Held\\\url{johannes.held@cs.fau.de}}
+\institute{Lehrstuhl für Informatik 6 (Datenmanagement)\\
+Department Informatik\\
+Technische Fakultät\\
+Friedrich-Alexander-Universität Erlangen-Nürnberg}
 \date{17.\,01.\,2011}
+
+\subject{Abschlusspräsentation Diplomarbeit Johannes Held}
+\keywords{event dissemination, p2p-overlay network, publish/subscribe system, decentralized}
 
 \begin{document}
 
 
-\frame{\titlepage}
+\frame[plain]{\titlepage}
 
 \frame{\tableofcontents}
 
 \section{Einleitung}
 \frame {
-	\frametitle{Einleitung}
+	\frametitle{Szenario}
+	Beispiel geben $\rightarrow$ Eventtypen
+}
+
+\frame {
+	\frametitle{Motivation I}
 	Ich will erzählen warum. Warum p2p, warum verteilt?
 	
 	\begin{block}{Kommunikation via Broadcast}
 		\begin{itemize}
-			\item $n$ Knoten; je 10 Bytes pro Update
-			\item Framerate 30 Hz (30 Updates/s)
-			\item pro Frame 0,3 KB/s an Server
 			\item Server hat 100 Mbit/s (12500 KB/s)
-			\item $\lfloor\sqrt{12500\,KB/s \div 0,3\,KB/s}\rfloor = 204$
+			\item Framerate 30 Hz (30 Updates/s)
+			\item $n$ Knoten; je 10 Bytes pro Update
+			\item $n$ · 0,3 KB/s an Server	
+			\item $\lfloor\sqrt{12500\,KB/s \div 0,3\,KB/s}\rfloor = 204$ Knoten
 		\end{itemize}
 	 \end{block}
 }
-
+	 
 \frame {
+	\frametitle{Motivation II}
+		 
+	 \begin{block}{Was tun?}
+	 	\begin{itemize}
+	 		\item Sharding
+	 		\item andere Kommunikationsstrategien
+	 		\item \dots aber häufig nur beschränkte Optimierung
+	 	\end{itemize}
+	 \end{block}
+	 
+	 \pause
+	 \begin{block}{M$^2$etis}
+	 	 	\begin{itemize}
+	 	 		\item Semantische Beschreibung der Eventtypen
+	 	 		\begin{itemize}
+	 	 		\item Optimierte Verteilung aller Events
+	 	 		\end{itemize}
+	 	 		\item Kommunikation via P2P
+	 	 	\end{itemize}
+	 \end{block}
+}
+
+\subsection{Eventtypen und Events}
+\frame{
+	\frametitle{Eventtypen und Events}
+	\begin{columns}
+		\column{.3\textwidth}
+		\begin{block}{Eventtyp}
+		\begin{itemize}
+			\item Position
+			\item Gegenstand nehmen
+			\item Sprechen
+		\end{itemize}
+	\end{block}		
+	\column{.61\textwidth}
+		\begin{block}{Event}
+		\begin{itemize}
+			\item Spieler A ist an Position (x,y)
+			\item Spieler A nimmt Schlüssel aus Truhe
+			\item Spieler A sagt "Hallo" (zu Spieler B)
+		\end{itemize}
+		\end{block}
+	\end{columns}
+}
+
+\section{M$^2$etis}
+\frame[plain] {
 	\frametitle{M$^2$etis}
-	\begin{figure}[htbp]
+	
+	\only<1>{
+	\begin{figure}[H]
 	\centering
 	\resizebox{\textwidth}{!}{%
 	\includegraphics{grafics/metis_aufbau.pdf}}
-	\caption{Architekturübersicht von M$^2$etis}
-	\label{fig:metis_aufbau}
 	\end{figure}
-}
-
-\frame {
-	\frametitle{M$^2$etis}
-	\begin{figure}[htbp]
-	\resizebox{0.5\textwidth}{!}{%
+	}
+	\only<2>{
+	\begin{figure}[H]
+	\resizebox{0.9\textwidth}{!}{%
 	\includegraphics{grafics/metis_aufbau.pdf}}
-	\label{fig:metis_aufbau}
 	\end{figure}
+
 	\begin{enumerate}
-	\item Semantische Beschreibung der Eventtypen
-	\item Generierung der optimierten Kanäle
-	\item Benutzung des PubSubSytems
+		\item Semantische Beschreibung der Eventtypen
+		\item Generierung der optimierten Kanäle
+		\item Benutzung des PubSubSytems
 	\end{enumerate}
+	}
 }
 
-
-
-\section{Szenario}
-\frame {
-	\frametitle{Szenario}
-	Beispiel geben -> Eventtypen
-}
-\section{Klassifizierung von Eventtypen}
+\subsection{Klassifizierung von Eventtypen}
 \frame {
 	\frametitle{Klassifizierung von Eventtypen}
 	\only<1> {
@@ -86,8 +139,8 @@
 			\end{itemize}
 		\end{block}		
 	}
-	\only<2-4> {
-	\begin{columns}
+	\only<2-> {
+	\begin{columns}[T]
 		\column{.4\textwidth}
 		\begin{block}{Dimensionen}
 		\begin{itemize}
@@ -100,7 +153,7 @@
 		\end{itemize}
 	\end{block}		
 	\column{.6\textwidth}
-		\only<3>{
+		\only<2>{
 		\begin{block}{Bewegung}
 		\begin{itemize}
 			\item räumlicher Kontext
@@ -111,7 +164,7 @@
 			\item ohne Zustellbenachrichtigung
 		\end{itemize}
 		\end{block}}
-	\only<4>{
+	\only<3>{
 		\begin{block}{Gegenstand aufnehmen}
 		\begin{itemize}
 			\item globaler Kontext
@@ -123,24 +176,46 @@
 		\end{itemize}
 		\end{block}}
 	
-	
 	\end{columns} }
-
 }
 
 \section{Strukturierte p2p-Netzwerke}
 \frame {
 	\frametitle{Strukturierte p2p-Netzwerke}
 	\begin{itemize}
-		\item Einarbeiten und Verstehen von CAN, Chord und Pastry
-		\item Suche 
+		\item Einarbeiten und Verstehen von CAN, Chord und Pastry 
 	\end{itemize}
 }
 \subsection{KBR-API}
 \frame {
 	\frametitle{KBR-API}
+	API erklären
 }
-\section{Umsetzung der Dimensionen}
+
+\subsection{Multicast-Tree}
+\frame{
+	\frametitle{Multicast-Tree (PubSub in verteilten Netzen)}
+	\begin{figure}[H]
+	\centering
+	\resizebox{\textwidth}{!}{%
+	\includegraphics{grafics/multicast_tree.pdf}}
+	\end{figure}
+}
+
+\section{Konzeption des Publish/Subscribe-Systems}
+\begin{frame}[fragile]
+	\frametitle{Konzeption des Publish/Subscribe-Systems}
+	Einfaches kanalbasiertes PubSub\\	transparent nutzbar \\
+
+	\begin{verbatim}
+	subscribe(Kanal, Callback, Filter*)
+	unsubscribe(Kanal)
+	publish(Kanal, Nachricht)
+	\end{verbatim}
+
+\end{frame}
+
+\subsection{Umsetzung der Dimensionen}
 \frame {
 	\frametitle{Umsetzung der Dimensionen}
 	\begin{description}
@@ -153,45 +228,124 @@
 	\item[Validität] prüft die ankommenden Nachrichten auf ihre Validität. Frühzeitig verworfene Nachrichten vermindern das Nachrichtenaufkommen im System stark.
 	\end{description}
 }
-\section{Konzeption des Publish/Subscribe-Systems}
+
+\subsection{Verarbeitungsmodell}
 \frame {
-	\frametitle{Konzeption des Publish/Subscribe-Systems}
+	\frametitle{Verarbeitungsmodell}
+	\begin{itemize}
+		\item Mapping PubSub auf KBR
+		\item Versand einer Nachricht
+		\item Verarbeitung einer Nachricht
+		\pause
+		\begin{itemize}
+			\item \dots in \texttt{forward}
+			\item \dots in \texttt{deliver}
+		\end{itemize}
+	\end{itemize}
 }
 
-\section{Hindernisse bei der Implementierung}
+\frame {
+	\frametitle{Mapping PubSub auf KBR}
+	\begin{table}[!h]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llccccccc}
+\toprule
+\multirow{2}{2cm}{Nachrichten\-typ} & \multirow{2}{2cm}{KBR-API Methode}	& \multicolumn{7}{c}{Policy pro Kanal} \\
+\cmidrule{3-9}
+			&	& Verteilung & Filterung & Zustellung & Reihenfolge & Persistenz & Sicherheit & Validität \\
+\toprule 
+Publish	    & \texttt{deliver} & + & + & + & + & + & + & + \\
+\midrule
+\multirow{2}{*}{Subscribe}	& \texttt{deliver} & + & + &   &   &   & + & \\
+\cmidrule{2-9}
+			& \texttt{forward} & + & + &   &   &   & + & \\
+\midrule
+\multirow{2}{*}{Unsubscribe} & \texttt{deliver} & + & + &   &   &   & + & \\
+\cmidrule{2-9}
+			& \texttt{forward} & + & + &   &   &   & + & \\
+\bottomrule
+\end{tabular}}
+\end{table}
+}
+
+\frame {
+	\frametitle{Nachrichtenversand}
+	\begin{figure}[H]
+	\centering
+	\resizebox{\textwidth}{!}{%
+	\includegraphics{grafics/processing_send.pdf}}
+	\end{figure}
+}
+	
+\frame {
+	\frametitle{Verarbeitung in \texttt{forward}}
+	\begin{figure}[H]
+	\centering
+	\resizebox{\textwidth}{!}{%
+	\includegraphics{grafics/processing_forward.pdf}}
+	\end{figure}
+}
+	
+\frame[shrink,plain] {
+	\frametitle{Verarbeitung in \texttt{deliver}}
+	\begin{figure}[H]
+	\centering
+	\includegraphics{grafics/processing_deliver.pdf}
+	\end{figure}
+}
+
+\section{Implementierung}
+\frame{
+	\frametitle{Implementierung}
+	Klassenmodell\\
+	Template-Metaprogramming\\
+	
+}
+
+\frame[plain]{
+	\frametitle{Vereinfachtes Klassenmodell}
+	\begin{figure}[H]
+	\centering
+	\resizebox{\textwidth}{!}{%
+	\includegraphics{grafics/uml.pdf}}
+	\end{figure}
+}
+
+\subsection{Hindernisse}
 \frame{
 	\frametitle{Hindernisse bei der Implementierung}
+	\only<1-2> {	
 	\begin{block}{Knotenausfall wird nicht erkannt}
-		\pause
-		\dots obwohl Chimera-Code das Nachrichtensenden prüft
+		\dots obwohl Chimera-Code den Versand einer Nachricht prüft
 		\pause
 		\begin{itemize}
 			\item Chimera sendet Nachrichten mit UDP
 			\item $\rightarrow$ Heartbeat-Mechanismus zur Erkennung
 		\end{itemize}
 	\end{block}
-	\pause
-	\begin{block}{Richtige Kommunikation schwer prüfbar}
-		\pause
+	}
+	\only<3> {
+	\begin{block}{Zusammenspiel PubSub-System und Netzwerk schwer prüfbar}
 		\begin{itemize}
 			\item Zu wenige Knoten $\rightarrow$ Fehlerhafte Einteilung in Routingtabellen
 			\item Zu viele Knoten $\rightarrow$ Debug-Ausgaben nicht mehr erfassbar
 		\end{itemize}		
 	\end{block}
-
+	}
 }
 
 
 \section{Offene Punkte}
 \frame{
 	\frametitle{Offene Punkte}
-	\begin{block}{Weiterführende Arbeiten}
+	\begin{block}{Es fehlen noch \dots}
 	\begin{itemize}[<+->]
 		\item Kostenmodell \& Semantische Beschreibung \& DSL
-
 		\item Strategies, Strategies, Strategies
 		\item M$^2$etis-Optimierer
 		\item Simulator (bsp. OverSim)
+		\pause
+		\item \dots
 	\end{itemize}
 	\end{block}
 }
@@ -200,11 +354,11 @@
 \frame{
 	\frametitle{Fragen?}
 	Gerne!\\
-	$\dots$ vielen Dank.
+	\dots vielen Dank.
 }
 
 
-\section{Literaturverzeichnis}
+\section*{Literaturverzeichnis}
 \frame{
 	\frametitle{Literaturverzeichnis}
 	\bibliographystyle{alphadin}
