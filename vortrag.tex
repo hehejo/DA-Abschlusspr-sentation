@@ -46,10 +46,10 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	
 	\begin{block}{Kommunikation via Broadcast}
 		\begin{itemize}
-			\item Server hat 100 Mbit/s (12500 KB/s)
+			\item Bandbreite Server 100 Mbit/s (12500 KB/s)
 			\item Framerate 30 Hz (30 Updates/s)
 			\item $n$ Knoten; je 10 Bytes pro Update
-			\item $n$ · 0,3 KB/s an Server	
+			\item $n$ · $0,3$ KB/s an Server	
 			\item $\lfloor\sqrt{12500\,KB/s \div 0,3\,KB/s}\rfloor = 204$ Knoten
 		\end{itemize}
 	 \end{block}
@@ -103,7 +103,7 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 
 \section{M$^2$etis}
 \subsection{Aufbau}
-\frame[plain] {
+\frame<1>[plain,label=m2etis] {
 	\frametitle{M$^2$etis -- Aufbau}
 	
 	%\only<1>{
@@ -112,6 +112,10 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	\resizebox{\textwidth}{!}{%
 	\includegraphics{grafics/metis_aufbau.pdf}}
 	\end{figure}
+	\begin{overprint}
+	\onslide<2>
+	\hyperlink{open_points<3>}{\beamerreturnbutton{Offene Punkte}}
+	\end{overprint}
 	%}
 	%\only<2>{
 	%\begin{figure}[H]
@@ -339,13 +343,13 @@ Publish	    & \texttt{deliver} & + & + & + & + & + & + & + \\
 
 
 \section{Offene Punkte}
-\frame{
+\frame[label=open_points]{
 	\frametitle{Offene Punkte}
 	\begin{block}{Es fehlen noch \dots}
 	\begin{itemize}[<+->]
 		\pause
 		\item Kostenmodell \& Semantische Beschreibung \& DSL
-		\item Strategies, Strategies, Strategies
+		\item Strategies, Strategies, Strategies \hyperlink{m2etis<2>}{\beamergotobutton{M$^2$etis}}
 		\item M$^2$etis-Optimierer
 		\item Simulator (bsp. OverSim)
 		\item \dots
@@ -359,5 +363,9 @@ Publish	    & \texttt{deliver} & + & + & + & + & + & + & + \\
 	Gerne!\\
 	\dots vielen Dank.
 }
+
+\appendix
+\againframe<2>[plain]{m2etis}
+
 
 \end{document}
