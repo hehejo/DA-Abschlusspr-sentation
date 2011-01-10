@@ -37,9 +37,25 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 
 \section{Einleitung}
 \subsection*{Szenario}
-\frame {
-	\frametitle{Szenario}
-	Beispiel geben $\rightarrow$ Eventtypen
+\frame<1|handout:2>[label=szenario] {
+	\frametitle{Szenario -- Quest in einem MMOG}
+	\begin{block}{Finde drei Goldeier}
+		Die Spielerin steuert ihren Avatar auf der Suche nach den Goldeiern durch die virtuelle Welt. \only<2>{\alert{(Position})}\\
+		Bevor ihr Avatar diese aufnehmen kann, kommt es zum Kampf mit einem Gegner. \only<2>{\alert{(Kampf)}}\\
+		Stolz, ihren ersten Kampf gewonnen zu haben, nimmt sie die Goldeier auf und berichtet davon ihn der Gilde. \only<2>{\alert{(Sprechen/ Gegenstand nehmen)}}\\
+		Gewonnene Erfahrungspunkte: 500
+	\end{block}
+	
+	\only<2|handout:0>{\hyperlink{eventtypen}{\beamerreturnbutton{Eventtypen und Events}}}
+}
+
+\frame<handout:0>[plain]{
+	\begin{figure}[H]
+	\centering
+	\resizebox{\textwidth}{!}{%
+	\includegraphics{grafics/kampf.jpg}}
+	\end{figure}
+	\tiny{ Warhammer Online: Age of Reckoning	\url{http://www.gameswelt.de/articles/previews/4833-Warhammer_Online/17777.html}}
 }
 
 \subsection*{Motivation}
@@ -82,7 +98,7 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 }
 
 \subsection*{Eventtypen und Events}
-\frame{
+\frame[label=eventtypen]{
 	\frametitle{Eventtypen und Events}
 	\begin{columns}
 		\column{.3\textwidth}
@@ -102,6 +118,15 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 		\end{itemize}
 		\end{block}
 	\end{columns}
+	
+	\vspace{0.5cm}
+	\visible<1|handout:0>{
+		\hyperlink{szenario<2>}{
+			\beamergotobutton{Szenario}
+		}
+	}
+	
+	
 }
 
 \section{M$^2$etis}
@@ -116,7 +141,7 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	\includegraphics{grafics/metis_aufbau.pdf}}
 	\end{figure}
 	\begin{overprint}
-	\onslide<2>
+	\onslide<2|handout:0>
 	\hyperlink{open_points<3>}{\beamerreturnbutton{Offene Punkte}}
 	\end{overprint}
 	%}
@@ -352,7 +377,7 @@ Publish	    & \texttt{deliver} & + & + & + & + & + & + & + \\
 	\begin{itemize}[<+->]
 		\pause
 		\item Kostenmodell \& Semantische Beschreibung \& DSL
-		\item Strategies, Strategies, Strategies \hyperlink{m2etis<2>}{\beamergotobutton{M$^2$etis}}
+		\item Strategies, Strategies, Strategies \visible<1|handout:0>{\hyperlink{m2etis<2>}{\beamergotobutton{M$^2$etis}}}
 		\item M$^2$etis-Optimierer
 		\item Simulator (bsp. OverSim)
 		\item \dots
@@ -372,7 +397,8 @@ Publish	    & \texttt{deliver} & + & + & + & + & + & + & + \\
 
 
 \appendix
-\againframe<2>[plain]{m2etis}
+\againframe<2|handout:0>{szenario}
+\againframe<2|handout:0>[plain]{m2etis}
 
 
 \end{document}
