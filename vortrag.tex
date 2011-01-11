@@ -231,7 +231,26 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 \subsection*{KBR-API}
 \frame {
 	\frametitle{KBR-API}
-	API erklären
+	\begin{block}{Abfragemethoden und drei Callbacks}
+	\begin{description}
+	\item[\texttt{update}] Knotenein- und austritt \\
+		\small (KnotenID, bool) \normalsize
+	\item[\texttt{forward}] Knoten leitet eine Nachricht weiter\\
+		\small (EmpfängerID*, Nachricht*, NextHopID*) \normalsize
+	\item[\texttt{deliver}] Knoten empfängt eine Nachricht \\
+		\small (EmpfängerID\&, Nachricht\&) \normalsize
+	\end{description}
+	\end{block}
+}	
+\frame {
+	\frametitle{KBR-API}
+	Nachricht von $0x3f$ an $0x7b$ wird über $0x4a$ und $0x64$ gesendet.
+	\begin{figure}[H]
+	\centering
+	\resizebox{\textwidth}{!}{%
+	\includegraphics{grafics/routing_kbr.pdf}}
+	\end{figure}
+	
 }
 
 \subsection*{Multicast-Tree}
