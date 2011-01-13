@@ -217,7 +217,7 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 \frame{
 	\frametitle{Ziel}
 	\begin{block}{Verteilungsoptimierung der Nachrichten}
-	Optimierte Verteilung aller Events anhand der semantischen Beschreibung der Eventtypen
+	Optimierte Verteilung aller Events anhand der semantischen Beschreibung ihrer Eventtypen
 	\end{block}
 }
 
@@ -227,9 +227,9 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	\begin{columns}
 	\column{.5\textwidth}
 	\begin{itemize}[<+->]
-		\item	 Jedem Knoten wird anhand Hashfunktion ein Schlüssel aus dem Schlüsselraum zugewiesen.
+		\item	 Jedem Knoten wird ein Schlüssel aus dem Schlüsselraum zugewiesen.
 		\item Jeder Knoten ist für einen Bereich aus diesem Schlüsselraum zuständig.
-		\item Zuständiger Knoten für jedes \emph{Datum} berechenbar
+		\item Zuständiger Knoten für jedes \emph{Datum} berechenbar.
 	\end{itemize}
 	\column{.5\textwidth}
 	\pause
@@ -281,9 +281,9 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 \begin{frame}[fragile]
 	\frametitle{Konzeption des Publish/Subscribe-Systems}
 	\begin{itemize}
-		\item 	kanalbasiertes Publish/Subscribe\\
+		\item 	kanalbasiertes Publish/Subscribe (mit Filterung)\\
 		Mapping \emph{Eventtyp} $\leftrightarrow$ \emph{optimierter Kanal}
-		\item 	transparent nutzbar \\ \emph{ohne} Wissen der Optimierungen (zur Übersetzungszeit)
+		\item 	transparent nutzbar \\ \emph{ohne} Wissen der Optimierungen
 	\end{itemize}
 	
 	\pause
@@ -299,15 +299,31 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 \subsection{Umsetzung der Dimensionen}
 \frame {
 	\frametitle{Umsetzung der Dimensionen}
-	\begin{description}
-	\item[Verteilung] bestimmt die Verteilungsart der einzelnen Events und den Aufbau des logischen Multicast-Trees, mittels dessen die Nachrichten versandt werden.
-	\item[Filterung] erlaubt es Anmeldungen, Prädikate mitzugeben. Implementierungen dieser Policy müssen sicherstellen, dass diese Prädikate nach oben im Multicast-Tree zusammengeführt und Nachrichten frühzeitig gefiltert werden können. Dies bedeutet, dass Nachrichten jeweils beim Versand durch den logischen Kopf des Multicast-Trees gefiltert werden.
-	\item[Zustellung] bestimmt das Kommunikationsparadigma des Nachrichtenversands und leitet beispielsweise den Versand von Bestätigungen über eingegangene Nachrichten an den sendenden Knoten ein.
-	\item[Reihenfolge] definiert das Synchronisationskonzept eines Kanals.
-	\item[Persistenz] bietet die Möglichkeit der Speicherung eines Events beziehungsweise der daraus erfolgenden Zustandsänderung der virtuellen Welt.
-	\item[Sicherheit] gibt eine Schnittstelle zur Nachrichtenverschlüsselung vor.
-	\item[Validität] prüft die ankommenden Nachrichten auf ihre Validität. Frühzeitig verworfene Nachrichten vermindern das Nachrichtenaufkommen im System stark.
-	\end{description}
+	\begin{columns}[T]
+	\column{.5\textwidth}
+		\begin{block}{Dimensionen}
+		\begin{itemize}
+			\item Kontext
+			\item Synchronisation
+			\item Persistenz
+			\item Sicherheit
+			\item Validität
+			\item Zustellung
+		\end{itemize}
+		\end{block}		
+	\column{.5\textwidth}
+		\begin{block}{Policy}
+		\begin{itemize}
+		\item Verteilung
+		\item Filterung		
+		\item Reihenfolge
+		\item Persistenz
+		\item Sicherheit
+		\item Validität
+		\item Zustellung
+		\end{itemize}
+		\end{block}
+	\end{columns}
 }
 
 \subsection{Verarbeitungsmodell}
