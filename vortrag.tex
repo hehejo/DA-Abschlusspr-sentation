@@ -15,7 +15,7 @@
 \usecolortheme{crane}
 
 \title[]{Entwicklung eines Frameworks für die Verteilungsoptimierung in Publish/Subscribe-Systemen auf Basis eines strukturierten P2P-Overlay-Netzwerks}
-\author[Johannes Held]{Johannes Held\\\url{mailto:jo@i6.informatik.uni-erlangen.de}}
+\author[Johannes Held]{Johannes Held\\\url{mailto:jo@ls6.informatik.uni-erlangen.de}}
 \institute{Lehrstuhl für Informatik 6 (Datenmanagement)\\
 Department Informatik\\
 Technische Fakultät\\
@@ -226,12 +226,13 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	\frametitle{Strukturierte p2p-Netzwerke}
 	\begin{columns}
 	\column{.5\textwidth}
-	\begin{itemize}
+	\begin{itemize}[<+->]
 		\item	 Jedem Knoten wird anhand Hashfunktion ein Schlüssel aus dem Schlüsselraum zugewiesen.
 		\item Jeder Knoten ist für einen Bereich aus diesem Schlüsselraum zuständig.
 		\item Zuständiger Knoten für jedes \emph{Datum} berechenbar
 	\end{itemize}
 	\column{.5\textwidth}
+	\pause
 	\begin{figure}[H]
 	\centering
 	\resizebox{.8\textwidth}{!}{%
@@ -267,18 +268,25 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 
 \subsection*{Multicast-Tree}
 \frame{
-	\frametitle{Multicast-Tree (PubSub in verteilten Netzen)}
+	\frametitle{Multicast-Tree (verteiltes Publish/Subscribe)}
 	\begin{figure}[H]
 	\centering
 	\resizebox{\textwidth}{!}{%
 	\includegraphics{grafics/multicast_tree.pdf}}
 	\end{figure}
+	Ein Multicast-Tree pro Kanal.
 }
 
 \section{Konzeption des Publish/Subscribe-Systems}
 \begin{frame}[fragile]
 	\frametitle{Konzeption des Publish/Subscribe-Systems}
-	Einfaches kanalbasiertes PubSub\\	transparent nutzbar \\
+	\begin{itemize}
+		\item 	kanalbasiertes Publish/Subscribe\\
+		Mapping \emph{Eventtyp} $\leftrightarrow$ \emph{optimierter Kanal}
+		\item 	transparent nutzbar \\ \emph{ohne} Wissen der Optimierungen (zur Übersetzungszeit)
+	\end{itemize}
+	
+	\pause
 
 	\begin{verbatim}
 	subscribe(Kanal, Callback, Filter*)
@@ -292,7 +300,7 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 \frame {
 	\frametitle{Umsetzung der Dimensionen}
 	\begin{description}
-	\item[Verteilung] bestimmt die Verteilungsart der einzelnen Events und den Aufbau des logischen Multicast-Trees, mittels dessen die Nachrichten versandt werden \cite{KostasKatrinis2005}.
+	\item[Verteilung] bestimmt die Verteilungsart der einzelnen Events und den Aufbau des logischen Multicast-Trees, mittels dessen die Nachrichten versandt werden.
 	\item[Filterung] erlaubt es Anmeldungen, Prädikate mitzugeben. Implementierungen dieser Policy müssen sicherstellen, dass diese Prädikate nach oben im Multicast-Tree zusammengeführt und Nachrichten frühzeitig gefiltert werden können. Dies bedeutet, dass Nachrichten jeweils beim Versand durch den logischen Kopf des Multicast-Trees gefiltert werden.
 	\item[Zustellung] bestimmt das Kommunikationsparadigma des Nachrichtenversands und leitet beispielsweise den Versand von Bestätigungen über eingegangene Nachrichten an den sendenden Knoten ein.
 	\item[Reihenfolge] definiert das Synchronisationskonzept eines Kanals.
@@ -306,7 +314,7 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 \frame {
 	\frametitle{Verarbeitungsmodell}
 	\begin{itemize}
-		\item Mapping PubSub auf KBR
+		\item Mapping Publish/Subscribe auf KBR
 		\item Versand einer Nachricht
 		\item Verarbeitung einer Nachricht
 		\pause
@@ -318,7 +326,7 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 }
 
 \frame {
-	\frametitle{Mapping PubSub auf KBR}
+	\frametitle{Mapping Publish/Subscribe auf KBR}
 	\begin{table}[!h]
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{llccccccc}
@@ -339,6 +347,10 @@ Publish	    & \texttt{deliver} & + & + & + & + & + & + & + \\
 \bottomrule
 \end{tabular}}
 \end{table}
+
+Verwaltung durch \{Un-\}Subscribe-Nachrichten\\
+Events entsprechen Publish-Nachrichten
+
 }
 
 \frame {
@@ -371,7 +383,7 @@ Publish	    & \texttt{deliver} & + & + & + & + & + & + & + \\
 \frame{
 	\frametitle{Implementierung}
 	Klassenmodell\\
-	Template-Metaprogramming\\
+	Template-Metaprogrammierung\\
 	
 }
 
@@ -382,6 +394,17 @@ Publish	    & \texttt{deliver} & + & + & + & + & + & + & + \\
 	\resizebox{\textwidth}{!}{%
 	\includegraphics{grafics/uml.pdf}}
 	\end{figure}
+}
+
+
+\frame{
+	\frametitle{Template-Metaprogrammierung}
+	\begin{itemize}
+		\item Gewählte Strategien (pro Kanal) werden zur Übersetzungszeit eingewoben
+		\item Nachrichtenheader (pro Kanal) wird zur Übersetzungszeit an gewählte Strategien angepasst
+		\item Alle Kanäle zur Übersetzungszeit bekannt
+		\item Lose Kopplung Netzwerk $\leftrightarrow$ Applikation
+	\end{itemize}
 }
 
 \subsection*{Hindernisse}
