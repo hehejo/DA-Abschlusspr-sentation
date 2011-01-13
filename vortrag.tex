@@ -224,9 +224,20 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 \section{Strukturierte p2p-Netzwerke}
 \frame {
 	\frametitle{Strukturierte p2p-Netzwerke}
+	\begin{columns}
+	\column{.5\textwidth}
 	\begin{itemize}
-		\item Einarbeiten und Verstehen von CAN, Chord und Pastry 
+		\item	 Jedem Knoten wird anhand Hashfunktion ein Schlüssel aus dem Schlüsselraum zugewiesen.
+		\item Jeder Knoten ist für einen Bereich aus diesem Schlüsselraum zuständig.
+		\item Zuständiger Knoten für jedes \emph{Datum} berechenbar
 	\end{itemize}
+	\column{.5\textwidth}
+	\begin{figure}[H]
+	\centering
+	\resizebox{.8\textwidth}{!}{%
+	\includegraphics{grafics/pastry_key_space.pdf}}
+	\end{figure}
+	\end{columns}
 }
 \subsection*{KBR-API}
 \frame {
@@ -234,9 +245,10 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	\begin{block}{Abfragemethoden und drei Callbacks}
 	\begin{description}
 	\item[\texttt{update}] Knotenein- und austritt \\
-		\small (KnotenID, bool) \normalsize
+		\small (KnotenID\&, bool) \normalsize
 	\item[\texttt{forward}] Knoten leitet eine Nachricht weiter\\
-		\small (EmpfängerID*, Nachricht*, NextHopID*) \normalsize
+		\small (EmpfängerID*, Nachricht*, NextHopID*) \normalsize \\
+		\visible<2>{\alert{Alle Parameter sind veränderbar!}}
 	\item[\texttt{deliver}] Knoten empfängt eine Nachricht \\
 		\small (EmpfängerID\&, Nachricht\&) \normalsize
 	\end{description}
