@@ -42,7 +42,7 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	\begin{block}{Finde drei Drachenklauen}
 		Die Spielerin steuert ihren Avatar auf der Suche nach den Drachenklauen durch die virtuelle Welt. \only<2>{\alert{(Position)}}\\
 		Bevor ihr Avatar diese aufnehmen kann, kommt es zum Kampf mit einem Gegner. \only<2>{\alert{(Kampf)}}\\
-		Stolz, ihren ersten Kampf gewonnen zu haben, nimmt sie die Drachenklauen auf und berichtet davon ihn der Gilde. \only<2>{\alert{(Sprechen/ Gegenstand nehmen)}}\\
+		Stolz, ihren ersten Kampf gewonnen zu haben, nimmt sie die Drachenklauen auf und berichtet davon in der Gilde. \only<2>{\alert{(Sprechen/ Gegenstand nehmen)}}\\
 		Gewonnene Erfahrungspunkte: 500
 	\end{block}
 	
@@ -61,10 +61,10 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 \subsection*{Motivation}
 \frame {
 	\frametitle{Motivation}
-	Ich will erzählen warum. Warum p2p, warum verteilt?
 	
 	\begin{block}{Kommunikation via Broadcast}
 		\begin{itemize}
+			\pause
 			\item Bandbreite Server 100 Mbit/s (12500 KB/s)
 			\item Framerate 30 Hz (30 Updates/s)
 			\item $n$ Knoten; je 10 Bytes pro Update
@@ -88,11 +88,11 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	 \pause
 	 \begin{block}{M$^2$etis (Massive Multiuser Event InfraStructure)}
 	 	 	\begin{itemize}
-	 	 		\item Semantische Beschreibung der Eventtypen
+	 	 		\item Semantische Beschreibung jedes Eventtyps
 	 	 		\begin{itemize}
-	 	 		\item Optimierte Verteilung aller Events
+	 	 		\item Optimierte Verteilung der Events
 	 	 		\end{itemize}
-	 	 		\item Kommunikation via p2p
+	 	 		\item Kommunikation via p2p \& Publish/Subscribe
 	 	 	\end{itemize}
 	 \end{block}
 }
@@ -125,45 +125,17 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 			\beamergotobutton{Szenario}
 		}
 	}
+
 	
 	
 }
 
 \section{M$^2$etis}
-\subsection{Aufbau}
-\frame<1>[plain,label=m2etis] {
-	\frametitle{M$^2$etis -- Aufbau}
-	
-	%\only<1>{
-	\begin{figure}[H]
-	\centering
-	\resizebox{\textwidth}{!}{%
-	\includegraphics{grafics/metis_aufbau.pdf}}
-	\end{figure}
-	\begin{overprint}
-	\onslide<2|handout:0>
-	\hyperlink{open_points<3>}{\beamerreturnbutton{Offene Punkte}}
-	\end{overprint}
-	%}
-	%\only<2>{
-	%\begin{figure}[H]
-	%\resizebox{0.9\textwidth}{!}{%
-	%\includegraphics{grafics/metis_aufbau.pdf}}
-	%\end{figure}
-
-	%\begin{enumerate}
-	%	\item Semantische Beschreibung der Eventtypen
-	%	\item Generierung der optimierten Kanäle
-	%	\item Benutzung des PubSubSytems
-	%\end{enumerate}
-	%}
-}
-
 \subsection{Klassifizierung von Eventtypen}
 \frame {
 	\frametitle{Klassifizierung von Eventtypen}
 	\only<1|handout:0> {
-		\begin{block}{Dimensionen}
+		\begin{block}{orthogonale Dimensionen}
 			\begin{itemize}
 				\item Kontext
 				\item Synchronisation
@@ -214,10 +186,34 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	\end{columns} }
 }
 
+
+
+\subsection{Aufbau}
+\frame<1>[plain,label=m2etis] {
+	\frametitle{M$^2$etis -- Aufbau}
+	
+	%\only<1>{
+	\begin{figure}[H]
+	\centering
+	\resizebox{\textwidth}{!}{%
+	\includegraphics{grafics/metis_aufbau.pdf}}
+	\end{figure}
+	\begin{overprint}
+	\onslide<2|handout:0>
+	\hyperlink{open_points<3>}{\beamerreturnbutton{Offene Punkte}}
+	\onslide<3|handout:0>
+	\hyperlink{uml}{\beamerreturnbutton{Vereinfachtes Klassenmodell}}
+	\end{overprint}
+}
+
 \frame{
 	\frametitle{Ziel}
 	\begin{block}{Verteilungsoptimierung der Nachrichten}
-	Optimierte Verteilung aller Events anhand der semantischen Beschreibung ihrer Eventtypen
+	\begin{tabbing}
+	Jeder \=Eventtyp\= wird semantisch beschrieben.\\
+	 \>$\rightarrow$ Optimierter Kommunikationskanal pro Eventtyp.\\
+		\>\>$\rightarrow$ Optimierte Verteilung aller Events.
+	\end{tabbing}
 	\end{block}
 }
 
@@ -227,17 +223,18 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	\begin{columns}
 	\column{.5\textwidth}
 	\begin{itemize}[<+->]
-		\item	 Jedem Knoten wird ein Schlüssel aus dem Schlüsselraum zugewiesen.
+		\item	Jedem Knoten wird ein Schlüssel aus dem Schlüsselraum zugewiesen.
 		\item Jeder Knoten ist für einen Bereich aus diesem Schlüsselraum zuständig.
 		\item Zuständiger Knoten für jedes \emph{Datum} berechenbar.
 	\end{itemize}
 	\column{.5\textwidth}
-	\pause
+	\visible<4>{
 	\begin{figure}[H]
 	\centering
 	\resizebox{.8\textwidth}{!}{%
 	\includegraphics{grafics/pastry_key_space.pdf}}
 	\end{figure}
+	}
 	\end{columns}
 }
 \subsection*{KBR-API}
@@ -395,25 +392,19 @@ Events entsprechen Publish-Nachrichten
 	\end{figure}
 }
 
-\section{Implementierung}
-\frame{
-	\frametitle{Implementierung}
-	Klassenmodell\\
-	Template-Metaprogrammierung\\
-	
-}
-
-\frame[plain]{
+\subsection{Vereinfachtes Klassenmodell}
+\frame[plain,label=uml]{
 	\frametitle{Vereinfachtes Klassenmodell}
 	\begin{figure}[H]
 	\centering
 	\resizebox{\textwidth}{!}{%
 	\includegraphics{grafics/uml.pdf}}
 	\end{figure}
+	\visible<1-|handout:0>{\hyperlink{m2etis<3>}{\beamergotobutton{M$^2$etis}}}
 }
 
 
-\frame{
+\frame<0:handout:1>{
 	\frametitle{Template-Metaprogrammierung}
 	\begin{itemize}
 		\item Gewählte Strategien (pro Kanal) werden zur Übersetzungszeit eingewoben
@@ -422,30 +413,6 @@ Events entsprechen Publish-Nachrichten
 		\item Lose Kopplung Netzwerk $\leftrightarrow$ Applikation
 	\end{itemize}
 }
-
-\subsection*{Hindernisse}
-\frame{
-	\frametitle{Hindernisse bei der Implementierung}
-	\only<1-2> {	
-	\begin{block}{Knotenausfall wird nicht erkannt}
-		\dots obwohl Chimera-Code den Versand einer Nachricht prüft
-		\pause
-		\begin{itemize}
-			\item Chimera sendet Nachrichten mit UDP
-			\item $\rightarrow$ Heartbeat-Mechanismus zur Erkennung
-		\end{itemize}
-	\end{block}
-	}
-	\only<3> {
-	\begin{block}{Zusammenspiel PubSub-System und Netzwerk schwer prüfbar}
-		\begin{itemize}
-			\item Zu wenige Knoten $\rightarrow$ Fehlerhafte Einteilung in Routingtabellen
-			\item Zu viele Knoten $\rightarrow$ Debug-Ausgaben nicht mehr erfassbar
-		\end{itemize}		
-	\end{block}
-	}
-}
-
 
 \section{Offene Punkte}
 \frame[label=open_points]{
@@ -476,6 +443,7 @@ Events entsprechen Publish-Nachrichten
 \appendix
 \againframe<2|handout:0>[plain]{szenario}
 \againframe<2|handout:0>[plain]{m2etis}
+\againframe<3|handout:0>[plain]{m2etis}
 
 
 \end{document}
