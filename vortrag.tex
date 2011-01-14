@@ -88,11 +88,9 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	 \pause
 	 \begin{block}{M$^2$etis (Massive Multiuser Event InfraStructure)}
 	 	 	\begin{itemize}
-	 	 		\item Semantische Beschreibung jedes Eventtyps
-	 	 		\begin{itemize}
-	 	 		\item Optimierte Verteilung der Events
-	 	 		\end{itemize}
-	 	 		\item Kommunikation via p2p \& Publish/Subscribe
+	 	 		\item Semantische Beschreibung jedes Eventtyps \\
+	 	 		$\rightarrow$ Optimierte Verteilung der Events
+	 	 		\item Publish/Subscribe via p2p 
 	 	 	\end{itemize}
 	 \end{block}
 }
@@ -186,7 +184,16 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	\end{columns} }
 }
 
-
+\frame{
+	\frametitle{Ziel}
+	\begin{block}{Verteilungsoptimierung aller Events}
+	\begin{tabbing}
+	Jeder \=Eventtyp\= wird semantisch beschrieben.\\
+	 \>$\rightarrow$ Optimierter Kommunikationskanal pro Eventtyp.\\
+		\>\>$\rightarrow$ Optimierte Verteilung aller Events.
+	\end{tabbing}
+	\end{block}
+}
 
 \subsection{Aufbau}
 \frame<1>[plain,label=m2etis] {
@@ -206,20 +213,12 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	\end{overprint}
 }
 
-\frame{
-	\frametitle{Ziel}
-	\begin{block}{Verteilungsoptimierung der Nachrichten}
-	\begin{tabbing}
-	Jeder \=Eventtyp\= wird semantisch beschrieben.\\
-	 \>$\rightarrow$ Optimierter Kommunikationskanal pro Eventtyp.\\
-		\>\>$\rightarrow$ Optimierte Verteilung aller Events.
-	\end{tabbing}
-	\end{block}
-}
+
 
 \section{Strukturierte p2p-Netzwerke}
 \frame {
 	\frametitle{Strukturierte p2p-Netzwerke}
+	\pause
 	\begin{columns}
 	\column{.5\textwidth}
 	\begin{itemize}[<+->]
@@ -436,7 +435,7 @@ Events entsprechen Publish-Nachrichten
 	\dots vielen Dank.
 }
 
-\frame[plain] {
+\frame<1|handout:0>[plain] {
 }
 
 
