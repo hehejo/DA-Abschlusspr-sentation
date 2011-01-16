@@ -65,11 +65,12 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	\begin{block}{Kommunikation via Broadcast}
 		\begin{itemize}
 			\pause
-			\item Bandbreite Server 100 Mbit/s (12500 KB/s)
+			\item Bandbreite Server 1 Gbit/s (131072 KB/s)
 			\item Framerate 30 Hz (30 Updates/s)
 			\item $n$ Knoten; je 10 Bytes pro Update
 			\item $n$ · $0,3$ KB/s an Server	
-			\item $\lfloor\sqrt{12500\,KB/s \div 0,3\,KB/s}\rfloor = 204$ Knoten
+			\pause
+			\item $\lfloor\sqrt{131072\,KB/s \div 0,3\,KB/s}\rfloor = 660$ Knoten
 		\end{itemize}
 	 \end{block}
 }
@@ -188,7 +189,7 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	\frametitle{Ziel}
 	\begin{block}{Verteilungsoptimierung aller Events}
 	\begin{tabbing}
-	Jeder \=Eventtyp\= wird semantisch beschrieben.\\
+	Jeder \=Eventtyp \= wird semantisch beschrieben.\\
 	 \>$\rightarrow$ Optimierter Kommunikationskanal pro Eventtyp.\\
 		\>\>$\rightarrow$ Optimierte Verteilung aller Events.
 	\end{tabbing}
@@ -207,7 +208,7 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 	\end{figure}
 	\begin{overprint}
 	\onslide<2|handout:0>
-	\hyperlink{open_points<3>}{\beamerreturnbutton{Offene Punkte}}
+	\hyperlink{open_points<1>}{\beamerreturnbutton{Offene Punkte}}
 	\onslide<3|handout:0>
 	\hyperlink{uml}{\beamerreturnbutton{Vereinfachtes Klassenmodell}}
 	\end{overprint}
@@ -239,15 +240,18 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg}
 \subsection*{KBR-API}
 \frame {
 	\frametitle{KBR-API}
-	\begin{block}{Abfragemethoden und drei Callbacks}
+	\begin{block}{Abfragemethoden}
+		\texttt{get\_neighborhood, get\_replicaset, local\_lookup, \dots}
+	\end{block}
+
+	\begin{block}{Callbacks}
 	\begin{description}
 	\item[\texttt{update}] Knotenein- und austritt \\
-		\small (KnotenID\&, bool) \normalsize
+		\small (KnotenID, bool) \normalsize
 	\item[\texttt{forward}] Knoten leitet eine Nachricht weiter\\
-		\small (EmpfängerID*, Nachricht*, NextHopID*) \normalsize \\
-		\visible<2>{\alert{Alle Parameter sind veränderbar!}}
+		\small (EmpfängerID, Nachricht, NextHopID) \normalsize
 	\item[\texttt{deliver}] Knoten empfängt eine Nachricht \\
-		\small (EmpfängerID\&, Nachricht\&) \normalsize
+		\small (EmpfängerID, Nachricht) \normalsize
 	\end{description}
 	\end{block}
 }	
@@ -417,10 +421,10 @@ Events entsprechen Publish-Nachrichten
 \frame[label=open_points]{
 	\frametitle{Offene Punkte}
 	\begin{block}{Es fehlen noch \dots}
-	\begin{itemize}[<+->]
-		\pause
+	\begin{itemize}
 		\item Kostenmodell \& Semantische Beschreibung \& DSL
 		\item Strategies, Strategies, Strategies \visible<1-|handout:0>{\hyperlink{m2etis<2>}{\beamergotobutton{M$^2$etis}}}
+		\pause
 		\item M$^2$etis-Optimierer
 		\item Simulator (bsp. OverSim)
 		\item \dots
